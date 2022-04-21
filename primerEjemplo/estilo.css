@@ -1,0 +1,47 @@
+.item
+{
+    background: gray;
+    padding: 10px;
+    border: 1px solid blue;
+}
+.cabecera
+{
+    grid-area: cabecera;
+}
+.izquierdo
+{
+    grid-area: izquierdo;
+}
+.contenido
+{
+    grid-area: contenido;
+}
+.pie
+{
+    grid-area: pie;
+}
+
+.contenedor
+{
+    background: #23475b;
+    display: grid;
+    /* grid-template-rows: 100px 1fr 100px; */
+    /* grid-template-columns: 300px 1fr; */
+
+    /* grid-gap: 5px; */
+    /* height: 100vh; */
+
+    grid-template-areas:"cabecera cabecera"
+                        "izquierdo contenido"
+                        "izquierdo pie";
+                        gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+
+}
+.contenedor > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+  }
