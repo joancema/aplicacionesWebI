@@ -29,7 +29,7 @@
     /* grid-template-columns: 300px 1fr; */
 
     /* grid-gap: 5px; */
-    /* height: 100vh; */
+    height: 100vh;
 
     grid-template-areas:"cabecera cabecera"
                         "izquierdo contenido"
