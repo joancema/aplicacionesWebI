@@ -1,0 +1,114 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>curso</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="fixed">Código</ion-label>
+          <ion-input [(ngModel)]="cursoAuxiliar.codigo"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label position="fixed">Cupo</ion-label>
+          <ion-input type="number" [(ngModel)]="cursoAuxiliar.cupo" ></ion-input>
+        </ion-item>
+
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="fixed">Descripción</ion-label>
+          <ion-input [(ngModel)]="cursoAuxiliar.descripcion"></ion-input>
+        </ion-item>
+
+      </ion-col>
+    </ion-row>
+    <ion-row>
+
+
+      <ion-col>
+
+        <ion-item>
+          <ion-label>SecciOn</ion-label>
+          <ion-select placeholder="Seleccion uno de ellos" [(ngModel)]= "cursoAuxiliar.seccion" >
+            <ion-select-option *ngFor="let item of SeccionesAuxiliar"  value="{{item.codigo}}">{{item.descripcion}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+      </ion-col>
+
+
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="fixed">IdentificaciOn</ion-label>
+          <ion-input [(ngModel)]="alumnoAuxiliar.identificacion"></ion-input>
+        </ion-item>
+
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label position="fixed">Nombre</ion-label>
+          <ion-input [(ngModel)]="alumnoAuxiliar.nombre"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    
+
+
+
+
+  </ion-grid>
+
+
+  <ion-grid>
+    <ion-row *ngFor="let item of cursoAuxiliar.alumnos">
+      <ion-col>{{item.identificacion}}</ion-col>
+      <ion-col>{{item.nombre}}</ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+  <ion-button shape="round" (click)="nuevo()" >Nuevo</ion-button>
+  <ion-button shape="round" (click)="grabar()" >Grabar</ion-button>
+  <ion-button shape="round" (click)="consultar()" >Consultar</ion-button>
+  <ion-button shape="round" (click)="eliminar()" >Eliminar</ion-button>
+  <ion-button shape="round" (click)="agregarAlumno()" >Agregar Alumno</ion-button>
+
+
+  <ion-grid>
+    <ion-row *ngFor="let item of cursosAuxiliar">
+      <ion-col size="2">
+        <ion-item color="primary" (click) = "consultaIndividual(item.codigo)" >
+          <ion-label position="fixed">{{item.codigo}}</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="fixed">{{item.descripcion}}</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item size="2">
+          <ion-label position="fixed">{{item.cupo}}</ion-label>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

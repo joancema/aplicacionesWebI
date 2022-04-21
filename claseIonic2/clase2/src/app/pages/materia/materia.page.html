@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>materia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-input [(ngModel)]="prueba" ></ion-input>
+  <ion-input type='number' [(ngModel)]="valor1" (change)='sumar()' ></ion-input>
+  <ion-input type='number' [(ngModel)]="valor2"  (change)='sumar()'  ></ion-input>
+
+  <ion-input type='number' [(ngModel)]="objetoPrueba.valor1" (ionChange)='sumar()' ></ion-input>
+  <ion-input type='number' [(ngModel)]="objetoPrueba.valor2"  (ionChange)='sumar()'  ></ion-input>
+
+
+
+
+<h1>RESULTADOS:</h1>
+<h2>{{prueba}}</h2>
+<h2>{{suma}}</h2>
+<h2>{{objetoPrueba.suma}}</h2>
+</ion-content>

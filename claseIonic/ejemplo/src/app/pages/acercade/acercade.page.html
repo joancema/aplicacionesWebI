@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>acercade</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  {{cursoAuxiliar.descripcion}}
+  <ion-item>
+    <ion-label position="fixed">Codigo</ion-label>
+    <ion-input [(ngModel)]="cursoAuxiliar.codigo"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">Descripcion</ion-label>
+    <ion-input [(ngModel)]="cursoAuxiliar.descripcion"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Gender</ion-label>
+    <ion-select placeholder="Select One" [(ngModel)]="cursoAuxiliar.seccion">
+      <ion-select-option *ngFor="let item of seccion"  value="{{item.codigo}}">
+        {{item.descripcion}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+
+
+  <ion-button color="danger" (click)="nuevo()">Nuevo</ion-button>
+  <ion-button color="danger" (click)="grabar()">Grabar</ion-button>
+  <ion-button color="danger" (click)="consultar()">Consultar</ion-button>
+  <ion-button color="danger" (click)="eliminar()">Eliminar</ion-button>
+
+  <ion-button color="danger" (click)="agregarAlumno()">Agregar Alumno</ion-button>
+
+  <ion-grid>
+    <ion-row class="info2" *ngFor="let item of cursosAuxiliar" >
+      <ion-col size="2">
+        <ion-item color="primary" (click)="consultarIndividual(item.codigo)">
+          <ion-label>
+            {{item.codigo}}
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="2">
+        <ion-item color="secondary">
+          <ion-label>
+            {{item.descripcion}}
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row class="info2" *ngFor="let item of cursoAuxiliar.alumnos" >
+      <ion-col size="2">
+        <ion-item color="secondary">
+          <ion-label>
+            {{item.nombre}}
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+    
+
+
+  <ion-button routerLink="/segunda">Primera forma</ion-button>
+  <ion-button (click)="navegar()">Segunda forma</ion-button>
+  <ion-button (click)="navegar2()">Tercera forma</ion-button>
+
+  <ion-button (click)="abrirModal()">Abrir Modal</ion-button>
+
+
+
+
+</ion-content>
