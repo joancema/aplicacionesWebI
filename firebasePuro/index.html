@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
+    <script>
+        var config = {
+        apiKey: "AIzaSyCl-UkMSWRpbFg8MnZRWRV_3YVAmtLMHbk",
+         authDomain: "clases-60ffb.firebaseapp.com",
+          databaseURL: "https://clases-60ffb.firebaseio.com", 
+          projectId: "clases-60ffb",
+        storageBucket: "clases-60ffb.appspot.com", 
+        messagingSenderId: "470695840063"
+        };
+        firebase.initializeApp(config);
+        var database = firebase.database();
+
+        window.addEventListener('load',function(){
+            let cedula= document.querySelector('#txtcedula');
+            let nombre= document.querySelector('#txtnombre');
+            let edad= document.querySelector('#txtedad');
+            let guardar= document.querySelector('#btnguardar');
+            let consultar= document.querySelector('#btnconsultar');
+            let listado= document.querySelector('#listado');
+            guardar.addEventListener('click',function(){
+                firebase.database().ref('estudiantes/'+ cedula.value ).set({
+                cedula: cedula.value,
+                nombre: nombre.value,
+                edad: edad.value
+                })
+            });
+
+
+            document.querySelector('#btnconsultar').addEventListener('click',
+                function(){
+                    firebase.database().ref('/estudiantes').on('value',function(resultado) { 
+                    html='<table border=1>'
+                    resultado.forEach(function(resul) {
+                    html+= `<tr><td>${resul.val().cedula} </td>
+                    <td> ${resul.val().nombre}</td>
+                    <td> ${resul.val().edad}</td>
+                    <td> <button class='accion' value=${resul.val().cedula}>Editar</button> </td>
+                    <td> <button class='accion' value=${resul.val().cedula}>Eliminar</button></td>
+                    </tr>`
+                    });
+                    html+='</table>'
+                    listado.innerHTML=html
+                    document.querySelectorAll('.accion').forEach(elemento=>{
+                        elemento.addEventListener('click',function(){
+                        accion(elemento.innerHTML, elemento.value)
+                    })
+                    });
+                });
+            });
+            function accion(tipo, valor) 
+            {
+                if (tipo=='Eliminar')
+                {
+                    firebase.database().ref('/estudiantes/'+valor).remove().then(p=>{
+                        alert('registro eliminado')
+                    });
+                } 
+                else
+                {
+                    firebase.database().ref('/estudiantes/'+valor).once('value',function(resultadoi){
+                    let objetoRespuesta= resultadoi.val() 
+                    cedula.value=objetoRespuesta.cedula; 
+                    nombre.value=objetoRespuesta.nombre;
+                    edad.value= objetoRespuesta.edad;
+                    }) 
+                }
+            }
+
+        })
+
+    </script>
+</head>
+<body>
+    <label for="txtcedula">Número de cédula</label>
+    <input type="text" id="txtcedula">
+    <label for="txtnombre">Nombre</label>
+    <input type="text" id="txtnombre">
+    <label for="txtedad">Edad</label>
+    <input type="text" id="txtedad">
+    <button id="btnguardar">Guardar</button>
+    <button id="btnconsultar">Consultar</button>
+    <div id="listado"></div>
+</body>
+</html>

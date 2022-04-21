@@ -1,0 +1,5 @@
+[
+    {"Codigo":1,"Nombre":"John", "Contacto":{"Nombre":"Fernando", "Relacion":"Hermano"}, 
+    "conexion":[{"Lugar":"Casa"}, {"Lugar":"Trabajo"}] },
+    {"Codigo":2,"Nombre":"Miguel", "conexion":[{"Lugar":"Casa"}]  }
+]

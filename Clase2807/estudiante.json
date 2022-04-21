@@ -1,0 +1,36 @@
+[
+
+{ "identificacion":"9999999999", "nombre": "Juan ", "direccion": "Manta", 
+    "contacto": { "nombre": "Maria", "relacion": "Novia" }, 
+    "conexiones": [
+        {"direccion":"San Pedro", "tipo":"Casa"},
+        {"direccion":"Los Esteros", "tipo":"Trabajo", "telefono":"651651" }
+    ]
+}
+,
+{ "identificacion":"123456789", "nombre": "Pedro ", "direccion": "La Aurora", 
+    "conexiones": [
+        {"direccion":"La Aurora", "tipo":"Casa"},
+        {"direccion":"Portoviejo", "tipo":"Familiar"}
+    ]
+}
+,
+{ "identificacion":"0000000000", "nombre": "Miguel ", "direccion": "Montecristi Los Bajos", 
+    "contacto": { "nombre": "Lady", "relacion": "Hermana" }, 
+    "conexiones": [
+        {"direccion":"Barrio Uno", "tipo":"Casa"},
+        {"direccion":"Ursa", "tipo":"Trabajo", "telefono":"630620" }
+    ]
+}
+,
+{ "identificacion":"3333", "nombre": "Pablo ", "direccion": "Universidad",  
+    "conexiones": [
+        {"direccion":"Barrio Uno", "tipo":"Casa"},
+        {"direccion":"Barrio el Paraiso", "tipo":"Trabajo"},
+        {"direccion":"ULEAM", "tipo":"Universidad", "telefono":"630620" }
+    ]
+}
+
+
+
+]

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
+    <script>
+    var config = {
+        apiKey: "AIzaSyCl-UkMSWRpbFg8MnZRWRV_3YVAmtLMHbk",
+        authDomain: "clases-60ffb.firebaseapp.com",
+        databaseURL: "https://clases-60ffb.firebaseio.com",
+        projectId: "clases-60ffb",
+        storageBucket: "clases-60ffb.appspot.com",
+        messagingSenderId: "470695840063"
+    };
+    firebase.initializeApp(config);
+    var database = firebase.database();
+
+    window.addEventListener('load',function(){
+
+        let identificacion = document.querySelector('#txtidentificacion');
+        let nombre= document.querySelector('#txtnombre');
+        let direccion= document.querySelector('#txtdireccion');
+        let telefono= document.querySelector('#txttelefono');
+
+        let listado= document.querySelector('#listado');
+
+        document.querySelector('#btnguardar').addEventListener('click',function(){
+            firebase.database().ref('clientes/'+ identificacion.value ).set({
+                identificacion: identificacion.value,
+                nombre: nombre.value ,
+                direccion: direccion.value ,
+                telefono: telefono.value
+            })
+        });
+        document.querySelector('#btnconsultar').addEventListener('click',function(){
+            firebase.database().ref('/clientes').on('value',function(resultado) {
+                html='<table border=1>'
+                    
+                resultado.forEach(function(resul) {
+                    html+= `<tr><td>${resul.val().identificacion} </td>
+                    <td> ${resul.val().nombre}</td> 
+                    <td> ${resul.val().direccion}</td> 
+                    <td> ${resul.val().telefono}</td> 
+                    <td> <button class='accion' value=${resul.val().identificacion} >Editar</button> </td>
+                    <td> <button class='accion' value=${resul.val().identificacion} >Eliminar</button></td> 
+                    </tr>` 
+                });      
+                html+='</table>'
+                listado.innerHTML=html
+
+                document.querySelectorAll('.accion').forEach(elemento=>{
+                    elemento.addEventListener('click',function(){
+                        accion(elemento.innerHTML, elemento.value)
+                    })
+                });
+
+            });
+        });
+        function accion(tipo, valor)
+        {
+            if (tipo=='Eliminar')
+            {
+                firebase.database().ref('/clientes/'+valor).remove().then(p=>{
+                    alert('registro eliminado')
+                });
+            }
+            else
+            {
+                firebase.database().ref('/clientes/'+valor).once('value',function(resultadoi){
+                    let objetoRespuesta= resultadoi.val()
+                    identificacion.value=objetoRespuesta.identificacion;
+                    nombre.value=objetoRespuesta.nombre;
+                    direccion.value=objetoRespuesta.direccion;
+                    telefono.value=objetoRespuesta.telefono;
+                })
+            }
+                
+        }
+        
+    });
+
+
+    </script>
+</head>
+<body>
+    <label for="txtidentificacion">Identificación</label>
+    <input type="text" value="" id="txtidentificacion">
+
+    <label for="txtnombre">Nombre</label>
+    <input type="text" value="" id="txtnombre">
+
+    <label for="txtdireccion">Dirección</label>
+    <input type="text" value="" id="txtdireccion">
+    
+    <label for="txttelefono">Teléfono</label>
+    <input type="text" value="" id="txttelefono">
+
+    <button id="btnguardar">Guardar</button>
+    <button id="btnconsultar">Consultar</button>
+    <div id="listado"></div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+.form-row
+{
+    display: block;
+    margin: 1em;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.has-error
+{
+    border: 1px red solid;
+}
